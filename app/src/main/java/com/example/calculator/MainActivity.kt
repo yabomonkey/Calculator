@@ -2,6 +2,7 @@ package com.example.calculator
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
@@ -9,7 +10,7 @@ import android.widget.TextView
 class MainActivity : AppCompatActivity() {
     private lateinit var result: EditText
     private lateinit var newNumber: EditText
-    private val displayOperation by lazy(LazyThreadSafetyMode.NONE) { findViewById<TextView>(R.id.operation) }
+//    private val displayOperation by lazy(LazyThreadSafetyMode.NONE) { findViewById<TextView>(R.id.operation) }
 
     //Variables to hold the operands and type of calculation
     private var operand1: Double? = null
@@ -43,6 +44,22 @@ class MainActivity : AppCompatActivity() {
         val buttonMultiply = findViewById<Button>(R.id.buttonMultiply)
         val buttonDivide = findViewById<Button>(R.id.buttonDivide)
 
+        val listener = View.OnClickListener { v ->
+            val b = v as Button
+            newNumber.append(b.text)
+        }
+
+        button0.setOnClickListener(listener)
+        button1.setOnClickListener(listener)
+        button2.setOnClickListener(listener)
+        button3.setOnClickListener(listener)
+        button4.setOnClickListener(listener)
+        button5.setOnClickListener(listener)
+        button6.setOnClickListener(listener)
+        button7.setOnClickListener(listener)
+        button8.setOnClickListener(listener)
+        button9.setOnClickListener(listener)
+        buttonDot.setOnClickListener(listener)
 
     }
 }
