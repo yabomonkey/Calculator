@@ -1,11 +1,11 @@
 package com.example.calculator
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.Button
 import android.widget.EditText
-import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
+
 
 class MainActivity : AppCompatActivity() {
     private lateinit var result: EditText
@@ -49,6 +49,15 @@ class MainActivity : AppCompatActivity() {
             newNumber.append(b.text)
         }
 
+        val dotListener = View.OnClickListener { v ->
+            val b = v as Button
+            val holder = b.text.toString()
+            val check : Boolean = holder.contains(".")
+            if(!check){
+                newNumber.append(b.text)
+            }
+        }
+
         button0.setOnClickListener(listener)
         button1.setOnClickListener(listener)
         button2.setOnClickListener(listener)
@@ -59,7 +68,11 @@ class MainActivity : AppCompatActivity() {
         button7.setOnClickListener(listener)
         button8.setOnClickListener(listener)
         button9.setOnClickListener(listener)
-        buttonDot.setOnClickListener(listener)
+        buttonDot.setOnClickListener(dotListener)
+
+//        val opListener = View.OnClickListener { view ->
+//            val op =
+//        }
 
     }
 }
