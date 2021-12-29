@@ -91,15 +91,19 @@ class MainActivity : AppCompatActivity() {
 
     private fun performOperation(value: String, operation: String){
 //        if(operand1 == null){
-//            operand1 = value
-//            result = operand1
-//            newNumber = ""
-//        } else {
-//            operand2 = value
-//            if(operation == "="){
-//                pendingOperation = operation
+//            operand1 = value.toDouble()
 //            } else {
-//                operand1 =
+//                operand2 = value.toDouble()
+//                if(operation == "="){
+//                    pendingOperation = operation
+//                }
+//                when (pendingOperation) {
+//                    "=" -> operand1 = operand2
+//                    "/" -> if(operand2 == 0.0){
+//                        operand1 = Double.NaN  //handle attempt to divide by zero
+//                    } else {
+//                        operand1 =
+//                    }
 //            }
 //        }
         displayOperation.text = operation
