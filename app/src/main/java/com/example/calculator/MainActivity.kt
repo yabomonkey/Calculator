@@ -4,13 +4,15 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Button
 import android.widget.EditText
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import kotlin.LazyThreadSafetyMode.*
 
 
 class MainActivity : AppCompatActivity() {
     private lateinit var result: EditText
     private lateinit var newNumber: EditText
-//    private val displayOperation by lazy(LazyThreadSafetyMode.NONE) { findViewById<TextView>(R.id.operation) }
+    private val displayOperation by lazy(NONE) { findViewById<TextView>(R.id.operation) }
 
     //Variables to hold the operands and type of calculation
     private var operand1: Double? = null
@@ -51,9 +53,8 @@ class MainActivity : AppCompatActivity() {
 
         val dotListener = View.OnClickListener { v ->
             val b = v as Button
-            val holder = b.text.toString()
-            val check : Boolean = holder.contains(".")
-            if(!check){
+            val holder = newNumber.text.toString()
+            if(!holder.contains(".")){
                 newNumber.append(b.text)
             }
         }
@@ -70,9 +71,37 @@ class MainActivity : AppCompatActivity() {
         button9.setOnClickListener(listener)
         buttonDot.setOnClickListener(dotListener)
 
-//        val opListener = View.OnClickListener { view ->
-//            val op =
-//        }
+        val opListener = View.OnClickListener { view ->
+            val op = (view as Button).text.toString()
+            val value = newNumber.text.toString()
+            if(value.isNotEmpty()) {
+                performOperation(value, op)
+            }
+            pendingOperation = op
+            displayOperation.text = pendingOperation
+        }
 
+        buttonEquals.setOnClickListener(opListener)
+        buttonDivide.setOnClickListener(opListener)
+        buttonMultiply.setOnClickListener(opListener)
+        buttonMinus.setOnClickListener(opListener)
+        buttonPlus.setOnClickListener(opListener)
+
+    }
+
+    private fun performOperation(value: String, operation: String){
+//        if(operand1 == null){
+//            operand1 = value
+//            result = operand1
+//            newNumber = ""
+//        } else {
+//            operand2 = value
+//            if(operation == "="){
+//                pendingOperation = operation
+//            } else {
+//                operand1 =
+//            }
+//        }
+        displayOperation.text = operation
     }
 }
