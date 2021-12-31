@@ -66,11 +66,13 @@ class MainActivity : AppCompatActivity() {
         val signListener = View.OnClickListener { view ->
             if (newNumber.text.isEmpty()){
                 newNumber.append("-")
-            } else if(newNumber.text.toString() == "-") {
-
             } else {
-                var changedNewNumber = newNumber.text.toString().toDouble()
-                newNumber.setText(changedNewNumber.unaryMinus().toString())
+                try {
+                    val changedNewNumber = newNumber.text.toString().toDouble()
+                    newNumber.setText((-changedNewNumber).toString())
+                } catch (e: java.lang.NumberFormatException) {
+                    //newNumber was "-" or "."
+                }
             }
 
         }
