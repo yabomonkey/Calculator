@@ -90,12 +90,15 @@ class MainActivity : AppCompatActivity() {
         buttonPlus.setOnClickListener(opListener)
 
         val signListener = View.OnClickListener { view ->
-            if (newNumber == null){
+            if (newNumber.text.isEmpty()){
                 newNumber.append("-")
-            } else {
-                newNumber!!.toString().toDouble().unaryMinus().also { newNumber.setText(it.toString()) }
+            } else if(newNumber.text.toString() == "-") {
 
+            } else {
+                var changedNewNumber = newNumber.text.toString().toDouble()
+                newNumber.setText(changedNewNumber.unaryMinus().toString())
             }
+
         }
 
         buttonSign.setOnClickListener(signListener)
