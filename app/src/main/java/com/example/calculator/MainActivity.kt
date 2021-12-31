@@ -25,6 +25,8 @@ class MainActivity : AppCompatActivity() {
             newNumber.append(b.text)
         }
 
+        var a = 1
+
         val dotListener = View.OnClickListener { v ->
             val b = v as Button
             val holder = newNumber.text.toString()
