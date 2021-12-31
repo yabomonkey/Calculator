@@ -89,6 +89,17 @@ class MainActivity : AppCompatActivity() {
         buttonMinus.setOnClickListener(opListener)
         buttonPlus.setOnClickListener(opListener)
 
+        val signListener = View.OnClickListener { view ->
+            if (newNumber == null){
+                newNumber.append("-")
+            } else {
+                newNumber!!.toString().toDouble().unaryMinus().also { newNumber.setText(it.toString()) }
+
+            }
+        }
+
+        buttonSign.setOnClickListener(signListener)
+
     }
 
     private fun performOperation(value: Double) {
