@@ -79,6 +79,12 @@ class MainActivity : AppCompatActivity() {
 
         buttonSign.setOnClickListener(signListener)
 
+        buttonClear.setOnClickListener(View.OnClickListener { view ->
+            newNumber.setText("")
+            null.also { operand1 = it }
+            result.setText("")
+        })
+
     }
 
     private fun performOperation(value: Double) {

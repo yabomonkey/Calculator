@@ -216,4 +216,15 @@
         app:layout_constraintStart_toStartOf="@+id/button0"
         app:layout_constraintTop_toBottomOf="@+id/button0" />
 
+    <Button
+        android:id="@+id/buttonClear"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:minWidth="48dp"
+        android:text="C"
+        android:textSize="14sp"
+        app:layout_constraintBaseline_toBaselineOf="@+id/buttonSign"
+        app:layout_constraintStart_toEndOf="@+id/buttonSign" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
