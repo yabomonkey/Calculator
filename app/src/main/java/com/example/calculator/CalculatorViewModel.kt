@@ -1,5 +1,6 @@
 package com.example.calculator
 
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import kotlinx.android.synthetic.main.activity_main.*
@@ -10,9 +11,14 @@ class CalculatorViewModel : ViewModel() {
     private var operand1: Double? = null
     private var pendingOperation = "="
 
-    val result = MutableLiveData<String>()
-    val newNumber = MutableLiveData<String>()
-    val operation = MutableLiveData<String>()
+    private val result = MutableLiveData<Double>()
+    val stringResult: LiveData<Double> by lazy { result }
+
+    private val newNumber = MutableLiveData<String>()
+    val stringNewNumber: LiveData<String> by lazy { newNumber }
+
+    private val operation = MutableLiveData<String>()
+    val stringOperation: LiveData<String> by lazy { operation }
 
     fun digitPressed(caption: String) {
         if (newNumber.value != null) {
@@ -61,7 +67,7 @@ class CalculatorViewModel : ViewModel() {
     fun clearPressed() {
         newNumber.value = ""
         operand1 = null
-        result.value = ""
+        result.value = null
         operation.value = ""
     }
 
@@ -82,7 +88,7 @@ class CalculatorViewModel : ViewModel() {
                 "+" -> operand1 = operand1!! + value
             }
         }
-        result.value = operand1.toString()
+        result.value = operand1
         newNumber.value = ""
     }
 }
