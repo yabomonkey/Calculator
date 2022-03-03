@@ -4,6 +4,8 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
+import androidx.activity.viewModels
+import androidx.lifecycle.Observer
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
@@ -12,16 +14,17 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        val viewModel: CalculatorViewModel by viewModels()
+        viewModel.result.observe(this, Observer<String> { stringResult -> result.setText(stringResult) })
+        viewModel.newNumber.observe(this, Observer<String> { stringNumber -> newNumber.setText(stringNumber) })
+        viewModel.operation.observe(this, Observer<String> { stringOperation -> operation.text = stringOperation})
+
         val listener = View.OnClickListener { v ->
-            viewModel.digitPressed(v as Button).text.toString()
+            viewModel.digitPressed((v as Button).text.toString())
         }
 
-        val dotListener = View.OnClickListener { v ->
-            val b = v as Button
-            val holder = newNumber.text.toString()
-            if (!holder.contains(".")) {
-                newNumber.append(b.text)
-            }
+        val dotListener = View.OnClickListener {
+            viewModel.dotPressed()
         }
 
         button0.setOnClickListener(listener)
@@ -47,17 +50,7 @@ class MainActivity : AppCompatActivity() {
         buttonPlus.setOnClickListener(opListener)
 
         val signListener = View.OnClickListener {
-            if (newNumber.text.isEmpty()){
-                newNumber.append("-")
-            } else {
-                try {
-                    val changedNewNumber = newNumber.text.toString().toDouble()
-                    newNumber.setText((-changedNewNumber).toString())
-                } catch (e: java.lang.NumberFormatException) {
-                    //newNumber was "-" or "."
-                }
-            }
-
+            viewModel.signPressed()
         }
 
         buttonSign.setOnClickListener(signListener)

@@ -1,6 +1,5 @@
 package com.example.calculator
 
-import android.widget.Button
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import kotlinx.android.synthetic.main.activity_main.*
@@ -13,6 +12,7 @@ class CalculatorViewModel : ViewModel() {
 
     val result = MutableLiveData<String>()
     val newNumber = MutableLiveData<String>()
+    val operation = MutableLiveData<String>()
 
     fun digitPressed(caption: String) {
         if (newNumber.value != null) {
@@ -24,13 +24,37 @@ class CalculatorViewModel : ViewModel() {
 
     fun operandPressed(op: String) {
         try {
-            val value = newNumber.value?.toString().toDouble()
-            performOperation(value)
+            val value = newNumber.value?.toDouble()
+            if (value != null) {
+                performOperation(value)
+            }
         } catch (e: NumberFormatException) {
-            newNumber.setText("")
+            newNumber.value = ""
         }
         pendingOperation = op
-        operation.text = pendingOperation
+        operation.value = pendingOperation
+    }
+
+    fun signPressed() {
+        val value = newNumber.value
+
+        if (value == null || value.isEmpty()){
+            newNumber.value = "-"
+        } else {
+            try {
+                val changedNewNumber = value.toDouble()
+                newNumber.value = (-changedNewNumber).toString()
+            } catch (e: java.lang.NumberFormatException) {
+                //newNumber was "-" or "."
+            }
+        }
+    }
+
+    fun dotPressed() {
+        val holder = newNumber.value.toString()
+        if (!holder.contains(".")) {
+            holder.append
+        }
     }
 
     private fun performOperation(value: Double) {
