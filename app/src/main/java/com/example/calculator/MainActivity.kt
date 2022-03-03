@@ -37,6 +37,7 @@ class MainActivity : AppCompatActivity() {
         button7.setOnClickListener(listener)
         button8.setOnClickListener(listener)
         button9.setOnClickListener(listener)
+
         buttonDot.setOnClickListener(dotListener)
 
         val opListener = View.OnClickListener { view ->
@@ -56,9 +57,7 @@ class MainActivity : AppCompatActivity() {
         buttonSign.setOnClickListener(signListener)
 
         buttonClear.setOnClickListener {
-            newNumber.setText("")
-            null.also { operand1 = it }
-            result.setText("")
+            viewModel.clearPressed()
         }
 
     }

@@ -53,8 +53,16 @@ class CalculatorViewModel : ViewModel() {
     fun dotPressed() {
         val holder = newNumber.value.toString()
         if (!holder.contains(".")) {
-            holder.append
+            holder.plus(".")
+            newNumber.value = holder
         }
+    }
+
+    fun clearPressed() {
+        newNumber.value = ""
+        operand1 = null
+        result.value = ""
+        operation.value = ""
     }
 
     private fun performOperation(value: Double) {
