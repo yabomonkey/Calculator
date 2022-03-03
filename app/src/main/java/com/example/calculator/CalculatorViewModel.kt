@@ -3,7 +3,6 @@ package com.example.calculator
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import kotlinx.android.synthetic.main.activity_main.*
 
 class CalculatorViewModel : ViewModel() {
 
@@ -59,15 +58,14 @@ class CalculatorViewModel : ViewModel() {
     fun dotPressed() {
         val holder = newNumber.value.toString()
         if (!holder.contains(".")) {
-            holder.plus(".")
-            newNumber.value = holder
+            newNumber.value = "$holder."
         }
     }
 
     fun clearPressed() {
         newNumber.value = ""
         operand1 = null
-        result.value = null
+        result.value = 0.0
         operation.value = ""
     }
 
