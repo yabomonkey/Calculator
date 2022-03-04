@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.activity.viewModels
 import androidx.lifecycle.Observer
 import kotlinx.android.synthetic.main.activity_main.*
+import java.math.BigDecimal
 
 class MainActivity : AppCompatActivity() {
 
@@ -14,8 +15,9 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val viewModel: CalculatorViewModel by viewModels()
-        viewModel.stringResult.observe(this, Observer<Double> { stringResult -> result.setText(stringResult.toString()) })
+//        val viewModel: CalculatorViewModel by viewModels()
+        val viewModel: BigDecimalViewModel by viewModels()
+        viewModel.stringResult.observe(this, Observer<BigDecimal> { stringResult -> result.setText(stringResult.toString()) })
         viewModel.stringNewNumber.observe(this, Observer<String> { stringNumber -> newNumber.setText(stringNumber) })
         viewModel.stringOperation.observe(this, Observer<String> { stringOperation -> operation.text = stringOperation})
 
